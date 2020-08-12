@@ -1,5 +1,23 @@
 
 object olivia {
+	var gradoDeConcentracion = 6
+	
+	// ACCION / ORDEN -> Tienen efecto / cambian cosas. (No devuelvan nada).
+	method recibirMasajes() {
+		gradoDeConcentracion = gradoDeConcentracion + 3
+	}	
+	method discute() {
+		gradoDeConcentracion = gradoDeConcentracion - 1
+	}
+	method darseUnBanioDeVapor() {
+		// Este método no tiene efecto.
+		// Es necesario para que olivia se pueda antender en el spa
+	}
+	
+	// CONSULTA / PREGUNTA -> Devuelve algo. (No tengan efecto / no cambien cosas).
+	method gradoDeConcentracion() {
+		return gradoDeConcentracion
+	}
 }
 
 
@@ -22,19 +40,50 @@ object bruno {
 	method estaPerfecto() { return self.esFeliz() and not self.tieneSed() and self.peso().between(50000, 70000) }
 	method mediodiaEnCasa() { 
 		self.comerFideos()
-		// y que mas?
+		self.tomarAgua()
+		self.verElNoticiero()
 	}
 }
 
 object ramiro {
-	method recibirMasajes() { /*... completar ...*/ }
-	method darseUnBanioDeVapor() { /*... completar ...*/ }
-	method comerseUnBigMac() { /*... completar ...*/ }
-	method bajarALaFosa() { /*... completar ...*/ }
-	method jugarAlPaddle() { /*... completar ...*/ }
+	// Estado
+	var nivelDeContractura = 0
+	var grasaEnLaPiel = true
 	
+	method recibirMasajes() { 
+		if (nivelDeContractura > 2) {			
+			nivelDeContractura = nivelDeContractura - 2
+		} else {
+			nivelDeContractura = 0
+		}
+	}
+	
+	method darseUnBanioDeVapor() {
+		grasaEnLaPiel = false
+	}
+	
+	method comerseUnBigMac() {
+		grasaEnLaPiel = true
+	}
+	
+	method bajarALaFosa() { 
+		grasaEnLaPiel = true
+		self.aumentarContractura(1)
+	}
+	
+	method jugarAlPaddle() {
+		self.aumentarContractura(3)
+	}
+	
+	// Dividir en subtareas
+	method aumentarContractura(cantidad) {
+		nivelDeContractura = nivelDeContractura + cantidad
+	}
+		
 	method diaDeTrabajo() { 
-		/*... completar ...*/
+		self.bajarALaFosa()
+		self.comerseUnBigMac()
+		self.bajarALaFosa()
 	}
 }
 
